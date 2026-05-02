@@ -1,3 +1,6 @@
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 import { NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
@@ -21,7 +24,9 @@ export async function GET() {
     });
 
     return NextResponse.json({ success: true, orders });
-  } catch {
+  } catch (error) {
+    console.error("Admin orders GET error:", error);
+
     return NextResponse.json(
       { success: false, error: "অর্ডার লোড করতে সমস্যা হয়েছে" },
       { status: 500 },
